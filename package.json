@@ -1,0 +1,43 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "node demo showing how to store data into a mongodb",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "mongodb",
+    "mongoose",
+    "demo"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^2.0.1",
+    "body-parser": "^1.18.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "dateformat": "^3.0.3",
+    "dotenv": "^6.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-fileupload": "^0.4.0",
+    "express-formidable": "^1.0.0",
+    "express-jwt": "^5.3.1",
+    "express-session": "^1.15.6",
+    "jsonwebtoken": "^8.2.2",
+    "moment": "^2.22.2",
+    "mongoose": "^5.0.18",
+    "mongoose-paginate": "^5.0.3",
+    "mongoose-timestamp": "^0.6.0",
+    "multer": "^1.3.0",
+    "nodemailer": "^4.6.6",
+    "req-flash": "0.0.3",
+    "then-busboy": "^2.3.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  }
+}
