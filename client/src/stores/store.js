@@ -8,6 +8,7 @@ const store = createStore(
   combineReducers({
     auth: authReducer,
     products:productsReducer,
+    singleproduct:productsReducer,
     cartItem:cartReducer
   }),
   applyMiddleware(

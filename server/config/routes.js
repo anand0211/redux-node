@@ -105,6 +105,12 @@ module.exports = function(app) {
         showProduct.manageProduct(req, res);
     });
 
+    //Get single Product
+
+    app.get("/single_product/:id", function(req, res) {
+        showProduct.getSingleProduct(req, res);
+    });
+
      //Route for show form of Add Product
     app.get("/add_product", function(req, res) {
         showProduct.productform(req, res);

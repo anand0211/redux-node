@@ -10,10 +10,16 @@ export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const SYNC_QUANTITY = 'SYNC_QUANTITY';
 export const UPDATE_CART = 'UPDATE_CART';
+export const FETCH_SINGLE_PRODUCT_SUCCESS = 'FETCH_SINGLE_PRODUCT_SUCCESS';
 
 export const fetchProductsSuccess = products => ({
   type: FETCH_PRODUCTS_SUCCESS,
   payload: { products }
+});
+
+export const fetchSingleProductSuccess = singleproduct => ({
+	type: FETCH_SINGLE_PRODUCT_SUCCESS,
+	payload:{ singleproduct }
 });
 
 /**
@@ -33,9 +39,9 @@ export function syncQuantity(quantity) {
   return { type: SYNC_QUANTITY, quantity };
 }
 
-export function updateCart(updatedCart) {
+export function updateCart(cartItem) {
 	debugger;
-  return { type: UPDATE_CART, updatedCart };
+  	return {  type: UPDATE_CART, cartItem};
 }
 
 /**
@@ -83,4 +89,19 @@ export function fetchProducts() {
       })
       .catch(error => console.log(error));
   };
+}
+
+export function fetchSingleProduct(iid) {
+	
+	return dispatch => {
+		return fetch("http://localhost:3001/single_product/"+iid)
+		.then(res => res.json())
+		.then((responseSingleData) => {
+			dispatch(fetchSingleProductSuccess(responseSingleData));
+			return responseSingleData;
+			
+		})
+
+		.catch(error => console.log(error));
+	};
 }

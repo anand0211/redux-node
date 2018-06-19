@@ -17,19 +17,17 @@ class Register extends Component {
 		};
 	}
 	
-	
 	updateDetails(event){
 		let updateDetails = Object.assign({}, this.state.details);
 		updateDetails[event.target.name] = event.target.value;
 		this.setState({
 			details: updateDetails   
 		});
-		//console.log(updateDetails);
 	}
 
 	register(){
 		this.props.dispatch(submitRegister(this.state.details));	
-		this.props.history.push('/SignIn');
+		//this.props.history.push('/SignIn');
 	}
 
 	render(){
@@ -46,10 +44,10 @@ class Register extends Component {
 				  </div>
 				  <div className="form">
 					<h2>Create an account</h2>
-					  <input onChange={this.updateDetails.bind(this)} type="text" name="firstName" placeholder="First Name" required=" " />
-					  <input onChange={this.updateDetails.bind(this)} type="text" name="lastName" placeholder="Last Name" required=" " />
-					  <input onChange={this.updateDetails.bind(this)} type="email" name="email" placeholder="Email Address" required=" " />
-					  <input onChange={this.updateDetails.bind(this)} type="password" name="password" placeholder="Password" required=" " />
+					  <input onChange={this.updateDetails.bind(this)} type="text" name="firstName" placeholder="First Name" required="required" />
+					  <input onChange={this.updateDetails.bind(this)} type="text" name="lastName" placeholder="Last Name" required="required" />
+					  <input onChange={this.updateDetails.bind(this)} type="email" name="email" placeholder="Email Address" required="required" />
+					  <input onChange={this.updateDetails.bind(this)} type="password" name="password" placeholder="Password" required="required" />
 					  <input type="submit" value="Register" onClick={this.register.bind(this)} />					
 				  </div>
 				  <div className="cta">

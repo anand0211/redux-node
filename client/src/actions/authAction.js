@@ -70,7 +70,8 @@ export function submitRegister(data){
 			.then((response) => {
 				//debugger;
 		        if (!response.ok) {
-		        	console.log(data.response);
+		        	debugger;
+		        	console.log(response);
 		        	dispatch(UserFailure(response));
 		        }
         		//return response.json();

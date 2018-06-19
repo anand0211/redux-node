@@ -20,13 +20,8 @@ class Products extends Component{
 	}
 
 	handleClick(e) {
-
-		if (this.props.isInCart) {
-            
-        }
         //debugger;
 		const getData = this.props.products.filter(p => p._id.toString() === e.currentTarget.id.toString());
-		//debugger;
             const cartItem = {
                 id:   getData[0]._id,
                 name: getData[0].productName,
@@ -40,6 +35,7 @@ class Products extends Component{
 
 	render(){
 		const data = this.props.products;
+		//console.log(data);
 		return(
 			<div>
 				<div className="banner">
@@ -110,8 +106,10 @@ class Products extends Component{
 								<figure>
 									<div className="snipcart-item block">
 										<div className="snipcart-thumb">
-											<a href="single.html">
-											<img src={"http://localhost:3001/uploads/"+item.images} alt=" " className="img-responsive" /></a>
+											
+											<Link to={'/SingleProduct/'+ item._id} >
+											<img src={"http://localhost:3001/uploads/"+item.images} alt=" " className="img-responsive" />
+											</Link>
 											<p>{item.productName} (100 gm)</p>
 											<h4>$ {item.prices} </h4>
 										</div>

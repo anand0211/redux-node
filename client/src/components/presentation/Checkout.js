@@ -8,86 +8,54 @@ class Checkout extends Component{
 		super(props);
 	
 	this.state =  {
-      currentQuantity: 1
+      currentTotal: 0
     }
 }
 
 	componentDidMount() {
     const  itemsInStore  = JSON.parse(localStorage.getItem('cart'));
-    //debugger;
-    const currentItem = itemsInStore.find(p => p.id.toString());
-
-    //Checks if there are any items present and assigns respective quantity value, else defaults to 0
-    // this.setState({
-    //   currentQuantity: currentItem ? currentItem.quantity : 0 
-    // });
-  
+    const currentItem = itemsInStore.find(p => p.id.toString());  
   }
-
-  	_updateQuantity = (change,iid) => {
-
-  	const  itemsInStore  = JSON.parse(localStorage.getItem('cart'));
-
-  	const  currentItem  = itemsInStore.find(p => p.id.toString() === iid.toString());
-
-    
-    let { quantity } = currentItem;
-    debugger;
-    switch(change) {
-      case "increment": {
-        quantity = quantity + 1;
-        break;
-      }
-      case "decrement": {
-        quantity = quantity - 1;
-        if(quantity === 0 || quantity === undefined) this.props.dispatch(removeFromCart(iid));
-      }
-    }
-
-    this.setState({
-      currentQuantity: quantity
-    })
-
-    const updatedItemDetails = Object.assign(currentItem, {quantity: quantity});
-
-    const syncCatalog = {
-      //item: item,
-      quantity: quantity
-    }
-    debugger;
-    this.props.updateCart(updatedItemDetails);
-    this.props.syncQuantity(syncCatalog);
-  }
-
 	handleClick(id)
 	{
 		this.props.removeFromCart(id);
 		this.props.history.push('/Checkout');
 	}
-	incrementClick(id,quantity){
-		const  findqty  = JSON.parse(localStorage.getItem('cart')).find(p => p.id.toString() === id.toString());
-		//const currentQTY = findqty[0].quantity;
-		//debugger;
-		const cartItem = {
-                id:   findqty.id,
-                name: findqty.name,
-                image: findqty.image,
-                price: findqty.price,
-                quantity:findqty.quantity + 1
-            };
-		localStorage.setItem('cart', JSON.stringify([cartItem]));		
+	incrementClick(id,quantity)
+	{
+		const  itemsInStore = JSON.parse(localStorage.getItem('cart'));
+		const  currentItem  = itemsInStore.find(p => p.id.toString() === id.toString());
+       	Object.assign(currentItem, {quantity:currentItem.quantity + 1});
+		this.props.updateCart(itemsInStore);
 		this.props.history.push('/Checkout');
 	}
 
-	decrementClick(quantity){
-
+	decrementClick(id,quantity)
+	{
+		alert(quantity);
+		if(quantity === 0 || quantity === undefined){
+			this.props.removeFromCart(id);
+			this.props.history.push('/Checkout');
+		} 
+			
+		const  itemsInStore = JSON.parse(localStorage.getItem('cart'));
+		//debugger;
+		const  currentItem  = itemsInStore.find(p => p.id.toString() === id.toString());
+       	Object.assign(currentItem, {quantity:currentItem.quantity - 1});
+		
+		debugger;
+		this.props.updateCart(itemsInStore);
+		this.props.history.push('/Checkout');
 	}
 
 
 	render(){
-		//debugger;
 		const view_cart = JSON.parse(localStorage.getItem('cart'));
 		const { currentQuantity } = this.state;
+		let subTotals = [];
+		view_cart.map((item) => {
+      		subTotals.push(item.quantity * item.price);
+    		});
 		return(
 				<div>
 					<div className="banner">
@@ -119,9 +87,9 @@ class Checkout extends Component{
 				<td className="invert">
 					<div className="quantity"> 
 						<div className="quantity-select">                           
-								<div className="entry value-minus" onClick={() => { this._updateQuantity('decrement',carts.id) }}>&nbsp;</div>
-								<div className="entry value"><span>{currentQuantity}</span></div>
-								<div className="entry value-plus active" onClick={() => { this._updateQuantity('increment',carts.id) }}>&nbsp;</div>
+								<div className="entry value-minus" onClick={() => { this.decrementClick(carts.id,carts.quantity) }}>&nbsp;</div>
+								<div className="entry value"><span>{carts.quantity}</span></div>
+								<div className="entry value-plus active" onClick={() => { this.incrementClick(carts.id,carts.quantity) }}>&nbsp;</div>
 								</div>
 							</div>
 				</td>
@@ -137,16 +105,14 @@ class Checkout extends Component{
 				))}
 				</table>
 				<h5 className="">{this.props.getCart.items ? this.props.getCart.items + ' item selected' : ''}</h5>
-	<strong>{this.props.getCart.items ? 'Rs ' + this.props.getCart.total : '0 in cart'}</strong>
+				<strong>$ {subTotals.reduce((accumulator, currentValue) => accumulator + currentValue)}</strong>
 			</div>
 
 		</div>
 		</div>
 		<div className="clearfix">
 		</div>
-
 	</div>
-
 				</div>
 			)
 	}

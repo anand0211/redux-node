@@ -10,11 +10,9 @@ export default (state = initialState, action) => {
   var updated = Object.assign({}, state);
 
   switch(action.type) {
-
     case constants.USER_REGISTERED:
       updated['loggedIn'] = true;
       updated['email'] = action.email;
-
       return updated;
 
     case constants.USER_LOGGEDIN:

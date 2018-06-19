@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from '../actions/productAction';
+import { ADD_TO_CART, REMOVE_FROM_CART, UPDATE_CART } from '../actions/productAction';
 import _ from 'underscore';
 
 var initialCartState = {
@@ -26,6 +26,14 @@ export default function cartReducer(state = initialCartState, action) {
             return {
                 items : state
             };
+
+    case UPDATE_CART:
+          
+          var cartState = JSON.parse(localStorage.getItem('cart'));
+          
+          localStorage.setItem('cart', JSON.stringify(action.cartItem));
+          debugger;
+         
 
     default:
       // ALWAYS have a default case in a reducer

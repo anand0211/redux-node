@@ -1,25 +1,26 @@
 //import constants from '../constants/actionProductTypes'
-import { FETCH_PRODUCTS_SUCCESS } from '../actions/productAction';
+import { FETCH_PRODUCTS_SUCCESS, FETCH_SINGLE_PRODUCT_SUCCESS } from '../actions/productAction';
 
 
 var initialState = {
-    items: []
+    items: [],
+    singleItem:{}
 }
 
 export default function productReducer(state = initialState, action) {
   switch(action.type) {
-    
     case FETCH_PRODUCTS_SUCCESS:
-    //console.log(action);
-      // All done: set loading "false".
-      // Also, replace the items with the ones from the server
       return {
         ...state,
         items: action.payload.products
       };
-
+    case FETCH_SINGLE_PRODUCT_SUCCESS:
+      //debugger;
+        return {
+        ...state,
+        singleItem: action.payload.singleproduct
+      };
     default:
-      // ALWAYS have a default case in a reducer
       return state;
   }
 }

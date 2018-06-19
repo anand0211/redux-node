@@ -8,6 +8,7 @@ import Layout from './components/layouts/Layout';
 import Register from './components/presentation/Register';
 import Login from './components/presentation/Login';
 import Products from './components/presentation/Products';
+import SingleProduct from './components/presentation/SingleProduct';
 import Checkout from './components/presentation/Checkout';
 
 class App extends Component {
@@ -22,6 +23,7 @@ class App extends Component {
           <Route path="/SignIn" component={ Login } />
           <Route path="/Products" component={ Products} />
           <Route path="/Checkout" component={ Checkout } />
+          <Route path="/SingleProduct/:id" component={SingleProduct} />
         </Layout>
       </BrowserRouter>
     </Provider>

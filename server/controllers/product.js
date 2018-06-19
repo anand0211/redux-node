@@ -100,6 +100,18 @@ showproductController.updateSingleProduct = function(req, res) {
     });
 };
 
+// Get Single Product document
+showproductController.getSingleProduct = function(req, res) {
+    Product.findOne({_id: req.params.id},
+        function(err, getProduct){
+            if(err){
+                console.log("Get Product Error");
+            }else{
+                res.json(getProduct);
+            }
+        });
+};
+
 //Update a single Product name controller method
 showproductController.executeUpdateProduct = function(req, res) {
 
